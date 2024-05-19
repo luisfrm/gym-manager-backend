@@ -1,0 +1,25 @@
+{
+  "name": "gym-manager-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisfrm/gym-manager-backend.git"
+  },
+  "author": "Luisfrm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisfrm/gym-manager-backend/issues"
+  },
+  "homepage": "https://github.com/luisfrm/gym-manager-backend#readme",
+  "description": "",
+  "dependencies": {
+    "cookies-parser": "1.2.0",
+    "cors": "2.8.5",
+    "express": "4.19.2",
+    "morgan": "1.10.0"
+  }
+}
