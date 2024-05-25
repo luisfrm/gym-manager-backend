@@ -1,0 +1,68 @@
+### Getting Started
+GET http://localhost:4506/
+
+
+### Register user
+GET http://localhost:4506/api/store/123
+Content-Type: application/json
+
+{
+  "email": "luisfrm@outlook.com",
+  "username": "luisitox",
+  "password": "password"
+}
+
+
+### Login
+POST http://localhost:4506/api/login
+Content-Type: application/json
+
+{
+  "email": "luisfrm_@outlook.com",
+  "password": "123456"
+}
+
+### Login
+POST http://localhost:4506/api/logout
+
+### Get profile
+GET http://localhost:4506/api/profile
+
+### Remove profile
+DELETE http://localhost:4506/api/profile
+Content-Type: application/json
+
+{
+  "id": "5f7b1b3b1f3b3b1f3b1f3b1f"
+}
+
+### Get tasks
+GET http://localhost:4506/api/tasks
+
+### Get task
+GET http://localhost:4506/api/tasks/66309a05d322a56f2e8407d5
+
+### Create task
+POST http://localhost:4506/api/tasks
+Content-Type: application/json
+
+{
+  "title": "Task 2",
+  "description": "It's a shprtly description",
+  "user": "66308c21d46e30d1759f696a"
+}
+
+### Update task
+PUT http://localhost:4506/api/tasks/66309a05d322a56f2e8407d5
+Content-Type: application/json
+
+{
+  "title": "Task 2 updated",
+  "description": "It's a shortly description... asdasd"
+}
+
+### Delete task
+DELETE http://localhost:4506/api/tasks/6630906f404dfae0bcf182cc
+
+### Verify token
+GET http://localhost:4506/api/verify-token
