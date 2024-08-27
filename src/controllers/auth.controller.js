@@ -4,7 +4,7 @@ import { generateJwt } from "../utils/jwt.js";
 
 class AuthController {
 	static async register(req, res) {
-		const { username, email, password } = req.body;
+		const { username, email, password, stores } = req.body;
 
 		try {
 			const userFoundByEmail = await userModel.findOne({
@@ -27,6 +27,7 @@ class AuthController {
 				username,
 				email,
 				password: passwordHash,
+				stores,
 			});
 
 			const userSaved = await newUser.save();
@@ -36,6 +37,7 @@ class AuthController {
 				id: userSaved._id,
 				username: userSaved.username,
 				email: userSaved.email,
+				stores: userSaved.stores,
 				createdAt: userSaved.createdAt,
 				updatedAt: userSaved.updatedAt,
 			});
@@ -89,7 +91,7 @@ class AuthController {
 		const user = req.user;
 
 		try {
-			const userFound = await userModel.findById(user.id);
+			const userFound = await userModel.findById(user.id).populate("stores");
 
 			if (!userFound) return res.status(404).json({ message: ["User not found."] });
 
@@ -97,6 +99,7 @@ class AuthController {
 				id: userFound._id,
 				username: userFound.username,
 				email: userFound.email,
+				stores: userFound.stores,
 				createdAt: userFound.createdAt,
 				updatedAt: userFound.updatedAt,
 			});

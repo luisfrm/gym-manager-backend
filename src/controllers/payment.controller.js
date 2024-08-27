@@ -16,7 +16,7 @@ class PaymentController {
 	static async getAll(_, res) {
 		try {
 			const { store_id } = req;
-			const payments = await PaymentModel.find({ store_id });
+			const payments = await PaymentModel.find({ store_id }).populate("client_id");
 			res.status(200).json(payments);
 		} catch (error) {
 			console.log("There was an error getting payment:", error);
@@ -26,7 +26,7 @@ class PaymentController {
 
 	static async getPending(_, res) {
 		try {
-			const payments = await PaymentModel.find({ store_id, status: "Pending" });
+			const payments = await PaymentModel.find({ store_id, status: "Pending" }).populate("client_id");
 			res.status(200).json(payments);
 		} catch (error) {
 			console.log("There was an error getting payment:", error);
@@ -48,7 +48,7 @@ class PaymentController {
 	static async getOnePayment(req, res) {
 		try {
 			const { id } = req.params;
-			const payment = await PaymentModel.findOne({ _id: id, store_id }).populate(
+			const payment = await PaymentModel.findOne({ _id: id }).populate(
 				"client_id"
 			);
 

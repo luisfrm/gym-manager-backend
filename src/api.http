@@ -53,13 +53,13 @@ Content-Type: application/json
 }
 
 ### Get All Stores
-GET http://localhost:4506/api/stores
+GET http://localhost:4506/api/store
 
 ### Get Store by ID
-GET http://localhost:4506/api/stores/{store_id}
+GET http://localhost:4506/api/store/66c9ab96ca9854b363c5b9b2
 
 ### Update Store
-PUT http://localhost:4506/api/stores/{store_id}
+PUT http://localhost:4506/api/store/66c9ab96ca9854b363c5b9b2
 Content-Type: application/json
 
 {
@@ -76,29 +76,29 @@ Content-Type: application/json
 }
 
 ### Delete Store
-DELETE http://localhost:4506/api/stores/{store_id}
+DELETE http://localhost:4506/api/store/66c9ab96ca9854b363c5b9b2
 
 ### Create Client
-POST http://localhost:4506/api/clients
+POST http://localhost:4506/api/client
 Content-Type: application/json
 
 {
   "name": "Luis",
-  "lastname": "Rivas",
+  "lastname": "Rivas", 
   "email": "luis@example.com",
   "phone": "+1234567890",
   "address": "789 Pine St",
-  "stores": ["store_id1", "store_id2"]
+  "store": "66c9ab96ca9854b363c5b9b2"
 }
 
-### Get All Clients
-GET http://localhost:4506/api/clients
+### Get All Client
+GET http://localhost:4506/api/client
 
 ### Get Client by ID
-GET http://localhost:4506/api/clients/{client_id}
+GET http://localhost:4506/api/client/66cd919f1253161c6cfd62d7
 
 ### Update Client
-PUT http://localhost:4506/api/clients/{client_id}
+PUT http://localhost:4506/api/client/66cd919f1253161c6cfd62d7
 Content-Type: application/json
 
 {
@@ -107,11 +107,11 @@ Content-Type: application/json
   "email": "luis@example.com",
   "phone": "+1234567890",
   "address": "789 Pine St",
-  "stores": ["store_id1"]
+  "store_id": "66c9ab96ca9854b363c5b9b2"
 }
 
 ### Delete Client
-DELETE http://localhost:4506/api/clients/{client_id}
+DELETE http://localhost:4506/api/client/66cd919f1253161c6cfd62d7
 
 ### Create Payment
 POST http://localhost:4506/api/payments
