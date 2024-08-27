@@ -9,7 +9,7 @@ const router = Router();
 
 router.get("/", authRequired, verifyStore, trainerController.getAll);
 
-router.get("/:id", authRequired, verifyStore, trainerController.getOne);
+router.get("/:id", authRequired, verifyStore, trainerController.getOneTrainer);
 
 router.post("/", authRequired, validateSchema(trainerSchema), trainerController.create);
 

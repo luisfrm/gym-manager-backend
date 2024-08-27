@@ -7,7 +7,7 @@ import { verifyStore } from "../middlewares/verifyStore.js";
 
 const router = Router();
 
-router.get("/", authRequired, verifyStore, logsController.getLogs);
+router.get("/", authRequired, verifyStore, logsController.getAll);
 
 router.post("/", authRequired, validateSchema(logsSchema), logsController.create);
 

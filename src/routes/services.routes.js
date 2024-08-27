@@ -9,10 +9,6 @@ const router = Router();
 
 router.get("/", authRequired, verifyStore, servicesController.getAll);
 
-router.get("/pending", authRequired, verifyStore, servicesController.getPending);
-
-router.get("/client/:client_id", authRequired, verifyStore, servicesController.getServicesByClient);
-
 router.get("/:id", authRequired, verifyStore, servicesController.getOneService);
 
 router.post("/", authRequired, validateSchema(serviceSchema), servicesController.create);
