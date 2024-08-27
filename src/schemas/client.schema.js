@@ -27,4 +27,5 @@ export const clientSchema = z.object({
 			invalid_type_error: "Address must be a string",
 		})
 		.optional(),
+	stores: z.array(z.string()).optional(), // Array of store ids
 });

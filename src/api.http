@@ -1,8 +1,9 @@
 ### Getting Started
 GET http://localhost:4506/
 
+---
 
-### Register user
+### Register User
 POST http://localhost:4506/api/register
 Content-Type: application/json
 
@@ -12,6 +13,7 @@ Content-Type: application/json
   "password": "password"
 }
 
+---
 
 ### Login
 POST http://localhost:4506/api/login
@@ -22,16 +24,245 @@ Content-Type: application/json
   "password": "password"
 }
 
+---
+
 ### Logout
 POST http://localhost:4506/api/logout
 
-### Get profile
+---
+
+### Get Profile
 GET http://localhost:4506/api/me
 
-### Remove profile
+---
+
+### Remove Profile
 DELETE http://localhost:4506/api/me
 Content-Type: application/json
 
 {
   "id": "5f7b1b3b1f3b3b1f3b1f3b1f"
 }
+
+---
+
+### Create Store
+POST http://localhost:4506/api/stores
+Content-Type: application/json
+
+{
+  "name": "Gym ABC",
+  "location": "123 Main St",
+  "phone": "+1234567890",
+  "email": "contact@gymabc.com",
+  "website": "http://www.gymabc.com",
+  "logo": "http://www.gymabc.com/logo.png",
+  "hours": {
+    "open": "08:00",
+    "closed": "22:00"
+  }
+}
+
+---
+
+### Get All Stores
+GET http://localhost:4506/api/stores
+
+---
+
+### Get Store by ID
+GET http://localhost:4506/api/stores/{store_id}
+
+---
+
+### Update Store
+PUT http://localhost:4506/api/stores/{store_id}
+Content-Type: application/json
+
+{
+  "name": "Gym XYZ",
+  "location": "456 Elm St",
+  "phone": "+0987654321",
+  "email": "contact@gymxyz.com",
+  "website": "http://www.gymxyz.com",
+  "logo": "http://www.gymxyz.com/logo.png",
+  "hours": {
+    "open": "09:00",
+    "closed": "21:00"
+  }
+}
+
+---
+
+### Delete Store
+DELETE http://localhost:4506/api/stores/{store_id}
+
+---
+
+### Create Client
+POST http://localhost:4506/api/clients
+Content-Type: application/json
+
+{
+  "name": "Luis",
+  "lastname": "Rivas",
+  "email": "luis@example.com",
+  "phone": "+1234567890",
+  "address": "789 Pine St",
+  "stores": ["store_id1", "store_id2"]
+}
+
+---
+
+### Get All Clients
+GET http://localhost:4506/api/clients
+
+---
+
+### Get Client by ID
+GET http://localhost:4506/api/clients/{client_id}
+
+---
+
+### Update Client
+PUT http://localhost:4506/api/clients/{client_id}
+Content-Type: application/json
+
+{
+  "name": "Luis",
+  "lastname": "Rivas",
+  "email": "luis@example.com",
+  "phone": "+1234567890",
+  "address": "789 Pine St",
+  "stores": ["store_id1"]
+}
+
+---
+
+### Delete Client
+DELETE http://localhost:4506/api/clients/{client_id}
+
+---
+
+### Create Payment
+POST http://localhost:4506/api/payments
+Content-Type: application/json
+Headers:
+store-id: store_id
+
+{
+  "amount": 100,
+  "currency": "USD",
+  "payment_method": "Credit Card",
+  "status": "Pending",
+  "client_id": "client_id",
+  "store_id": "store_id"
+}
+
+---
+
+### Get All Payments
+GET http://localhost:4506/api/payments
+Headers:
+store-id: store_id
+
+---
+
+### Get Pending Payments
+GET http://localhost:4506/api/payments/pending
+Headers:
+store-id: store_id
+
+---
+
+### Get Payments by Client
+GET http://localhost:4506/api/payments/client/{client_id}
+Headers:
+store-id: store_id
+
+---
+
+### Get Payment by ID
+GET http://localhost:4506/api/payments/{payment_id}
+Headers:
+store-id: store_id
+
+---
+
+### Update Payment
+PUT http://localhost:4506/api/payments/{payment_id}
+Content-Type: application/json
+Headers:
+store-id: store_id
+
+{
+  "amount": 150,
+  "currency": "USD",
+  "payment_method": "Debit Card",
+  "status": "Completed"
+}
+
+---
+
+### Delete Payment
+DELETE http://localhost:4506/api/payments/{payment_id}
+Headers:
+store-id: store_id
+
+---
+
+### Create Log
+POST http://localhost:4506/api/logs
+Content-Type: application/json
+Headers:
+store-id: store_id
+
+{
+  "message": "User logged in",
+  "level": "info",
+  "timestamp": "2024-08-21T12:00:00Z",
+  "store_id": "store_id"
+}
+
+---
+
+### Get All Logs
+GET http://localhost:4506/api/logs
+Headers:
+store-id: store_id
+
+---
+
+### Get Recent Logs
+GET http://localhost:4506/api/logs/recent
+Headers:
+store-id: store_id
+Query Parameters:
+quantity=10
+
+---
+
+### Get Log by ID
+GET http://localhost:4506/api/logs/{log_id}
+Headers:
+store-id: store_id
+
+---
+
+### Update Log
+PUT http://localhost:4506/api/logs/{log_id}
+Content-Type: application/json
+Headers:
+store-id: store_id
+
+{
+  "message": "User updated profile",
+  "level": "info"
+}
+
+---
+
+### Delete Log
+DELETE http://localhost:4506/api/logs/{log_id}
+Headers:
+store-id: store_id

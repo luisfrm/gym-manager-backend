@@ -39,7 +39,7 @@ export const storeSchema = z.object({
 				required_error: "Store open hours are required",
 				invalid_type_error: "Store open hours must be a string",
 			}),
-			close: z.string({
+			closed: z.string({
 				required_error: "Store close hours are required",
 				invalid_type_error: "Store close hours must be a string",
 			}),
