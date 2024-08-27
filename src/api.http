@@ -1,8 +1,6 @@
 ### Getting Started
 GET http://localhost:4506/
 
----
-
 ### Register User
 POST http://localhost:4506/api/register
 Content-Type: application/json
@@ -10,10 +8,9 @@ Content-Type: application/json
 {
   "email": "luisfrm@outlook.com",
   "username": "luisitox",
-  "password": "password"
+  "password": "password",
+  "stores": ["66c9ab96ca9854b363c5b9b2"]
 }
-
----
 
 ### Login
 POST http://localhost:4506/api/login
@@ -24,17 +21,11 @@ Content-Type: application/json
   "password": "password"
 }
 
----
-
 ### Logout
 POST http://localhost:4506/api/logout
 
----
-
 ### Get Profile
 GET http://localhost:4506/api/me
-
----
 
 ### Remove Profile
 DELETE http://localhost:4506/api/me
@@ -43,8 +34,6 @@ Content-Type: application/json
 {
   "id": "5f7b1b3b1f3b3b1f3b1f3b1f"
 }
-
----
 
 ### Create Store
 POST http://localhost:4506/api/stores
@@ -63,17 +52,11 @@ Content-Type: application/json
   }
 }
 
----
-
 ### Get All Stores
 GET http://localhost:4506/api/stores
 
----
-
 ### Get Store by ID
 GET http://localhost:4506/api/stores/{store_id}
-
----
 
 ### Update Store
 PUT http://localhost:4506/api/stores/{store_id}
@@ -92,12 +75,8 @@ Content-Type: application/json
   }
 }
 
----
-
 ### Delete Store
 DELETE http://localhost:4506/api/stores/{store_id}
-
----
 
 ### Create Client
 POST http://localhost:4506/api/clients
@@ -112,17 +91,11 @@ Content-Type: application/json
   "stores": ["store_id1", "store_id2"]
 }
 
----
-
 ### Get All Clients
 GET http://localhost:4506/api/clients
 
----
-
 ### Get Client by ID
 GET http://localhost:4506/api/clients/{client_id}
-
----
 
 ### Update Client
 PUT http://localhost:4506/api/clients/{client_id}
@@ -137,12 +110,8 @@ Content-Type: application/json
   "stores": ["store_id1"]
 }
 
----
-
 ### Delete Client
 DELETE http://localhost:4506/api/clients/{client_id}
-
----
 
 ### Create Payment
 POST http://localhost:4506/api/payments
@@ -159,35 +128,25 @@ store-id: store_id
   "store_id": "store_id"
 }
 
----
-
 ### Get All Payments
 GET http://localhost:4506/api/payments
 Headers:
 store-id: store_id
-
----
 
 ### Get Pending Payments
 GET http://localhost:4506/api/payments/pending
 Headers:
 store-id: store_id
 
----
-
 ### Get Payments by Client
 GET http://localhost:4506/api/payments/client/{client_id}
 Headers:
 store-id: store_id
 
----
-
 ### Get Payment by ID
 GET http://localhost:4506/api/payments/{payment_id}
 Headers:
 store-id: store_id
-
----
 
 ### Update Payment
 PUT http://localhost:4506/api/payments/{payment_id}
@@ -202,14 +161,10 @@ store-id: store_id
   "status": "Completed"
 }
 
----
-
 ### Delete Payment
 DELETE http://localhost:4506/api/payments/{payment_id}
 Headers:
 store-id: store_id
-
----
 
 ### Create Log
 POST http://localhost:4506/api/logs
@@ -224,14 +179,10 @@ store-id: store_id
   "store_id": "store_id"
 }
 
----
-
 ### Get All Logs
 GET http://localhost:4506/api/logs
 Headers:
 store-id: store_id
-
----
 
 ### Get Recent Logs
 GET http://localhost:4506/api/logs/recent
@@ -240,14 +191,10 @@ store-id: store_id
 Query Parameters:
 quantity=10
 
----
-
 ### Get Log by ID
 GET http://localhost:4506/api/logs/{log_id}
 Headers:
 store-id: store_id
-
----
 
 ### Update Log
 PUT http://localhost:4506/api/logs/{log_id}
@@ -259,8 +206,6 @@ store-id: store_id
   "message": "User updated profile",
   "level": "info"
 }
-
----
 
 ### Delete Log
 DELETE http://localhost:4506/api/logs/{log_id}
