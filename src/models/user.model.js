@@ -20,13 +20,11 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: [true, "Password is required"],
 		},
-		stores: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "Store",
-				default: [],
-			},
-		],
+		store_id: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Store",
+			required: [true, "Store ID is required"],
+		}
 	},
 	{
 		timestamps: true,

@@ -37,7 +37,7 @@ const storeSchema = new mongoose.Schema(
         type: String,
         trim: true,
       },
-      close: {
+      closed: {
         type: String,
         trim: true,
       },
