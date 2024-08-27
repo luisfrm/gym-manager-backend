@@ -32,7 +32,7 @@ class AuthController {
 			});
 
 			const userSaved = await newUser.save();
-			const token = await generateJwt({ id: userSaved._id });
+			const token = await generateJwt({ id: userSaved._id, stores: userFound.stores });
 			res.cookie("token", token);
 			res.status(201).json({
 				id: userSaved._id,
@@ -67,7 +67,7 @@ class AuthController {
 
 			if (!isPasswordMatch) return res.status(400).json({ message: ["Invalid credentials."] });
 
-			const token = await generateJwt({ id: userFound._id });
+			const token = await generateJwt({ id: userFound._id, stores: userFound.stores });
 			res.cookie("token", token);
 			res.status(200).json({
 				id: userFound._id,
