@@ -44,5 +44,5 @@ export const registerSchema = z.object({
 		.min(6, {
 			message: "Password must be at least 6 characters long",
 		}),
-		stores: z.array(z.string()).optional(), // Array of store ids
+	stores: z.array(z.string()).optional(), // Array of store ids
 });

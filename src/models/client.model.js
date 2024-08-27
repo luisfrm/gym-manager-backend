@@ -25,12 +25,11 @@ const clientSchema = new mongoose.Schema(
 			type: String,
 			trim: true,
 		},
-		stores: [
-			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "Store",
-			},
-		],
+		store_id: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Store",
+			required: [true, "Store ID is required"],
+		},
 	},
 	{
 		timestamps: true,
