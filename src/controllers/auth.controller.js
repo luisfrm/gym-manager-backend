@@ -30,7 +30,7 @@ class AuthController {
 			});
 
 			const userSaved = await newUser.save();
-			const token = await generateJwt({ id: userSaved._id, stores: userFound.stores });
+			const token = await generateJwt({ id: userSaved._id, stores: userSaved.stores });
 			res.cookie("token", token);
 			res.status(201).json({
 				id: userSaved._id,
