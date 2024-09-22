@@ -14,12 +14,23 @@ import logsRouter from "./routes/logs.routes.js";
 import paymentRouter from "./routes/payment.routes.js";
 
 const PORT = process.env.PORT || 3000;
-const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
+// const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
 
 const createApp = () => {
 	const app = express();
 
-	app.use(cors({ origin: CORS_ORIGIN, credentials: true }));
+	const allowedOrigins = ['http://localhost:5173', 'https://gym-manager-frontend.netlify.app'];
+
+	app.use(cors({
+		origin: (origin, callback) => {
+			if (allowedOrigins.includes(origin) || !origin) {
+				callback(null, true);
+			} else {
+				callback(new Error('Not allowed by CORS'));
+			}
+		},
+		credentials: true,
+	}));
 	app.use(json());
 	app.use(morgan("dev"));
 	app.use(cookieParser());
