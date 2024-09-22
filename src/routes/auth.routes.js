@@ -16,4 +16,6 @@ router.get("/me", authRequired, authController.profile);
 
 router.delete("/me", authRequired, authController.removeProfile);
 
+router.get("/validate-token", authController.validateToken);
+
 export default router;

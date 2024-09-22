@@ -1,5 +1,7 @@
 import userModel from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { TOKEN_SECRET_JWT } from "../config.js";
 import { generateJwt } from "../utils/jwt.js";
 
 class AuthController {
@@ -114,6 +116,31 @@ class AuthController {
 		if (!user) return res.status(404).json({ message: ["User not found."] });
 
 		res.status(200).send("User deleted.");
+	};
+
+	static validateToken = (req, res) => {
+		const token = req.cookies.token;
+		if(!token) return res.status(401).json({ message: "Unauthorized" });
+
+		try {
+			jwt.verify(token, TOKEN_SECRET_JWT, (err, user) => {
+				if (err) return res.status(401).json({ message: "Unauthorized" });
+
+				const userFound = userModel.findById(user.id);
+
+				if (!userFound) return res.status(401).json({ message: ["Unauthorized"] });
+
+				res.status(200).json({
+					id: userFound._id,
+					username: userFound.username,
+					email: userFound.email,
+					createdAt: userFound.createdAt,
+					updatedAt: userFound.updatedAt,
+				});
+			})
+		} catch (error) {
+			res.status(500).json({ message: "Internal Server Error" });
+		}
 	};
 }
 
