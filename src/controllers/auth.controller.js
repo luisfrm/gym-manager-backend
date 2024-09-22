@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { TOKEN_SECRET_JWT } from "../config.js";
 import { generateJwt } from "../utils/jwt.js";
+import getToken from "../utils/getToken.js";
 
 class AuthController {
 	static async register(req, res) {
@@ -34,7 +35,7 @@ class AuthController {
 
 			const userSaved = await newUser.save();
 			const token = await generateJwt({ id: userSaved._id, stores: userSaved.stores });
-			res.cookie("token", token);
+			// res.cookie("token", token);
 			res.status(201).json({
 				id: userSaved._id,
 				username: userSaved.username,
@@ -42,6 +43,7 @@ class AuthController {
 				stores: userSaved.stores,
 				createdAt: userSaved.createdAt,
 				updatedAt: userSaved.updatedAt,
+				token,
 			});
 		} catch (error) {
 			console.log(error);
@@ -70,13 +72,14 @@ class AuthController {
 			if (!isPasswordMatch) return res.status(400).json({ message: ["Invalid credentials."] });
 
 			const token = await generateJwt({ id: userFound._id, stores: userFound.stores });
-			res.cookie("token", token);
+			// res.cookie("token", token);
 			res.status(200).json({
 				id: userFound._id,
 				username: userFound.username,
 				email: userFound.email,
 				createdAt: userFound.createdAt,
 				updatedAt: userFound.updatedAt,
+				token,
 			});
 		} catch (error) {
 			console.log(error);
@@ -118,27 +121,28 @@ class AuthController {
 		res.status(200).send("User deleted.");
 	};
 
-	static validateToken = (req, res) => {
-		const token = req.cookies.token;
+	static validateToken = async (req, res) => {
+		const token = getToken(req);
 		if(!token) return res.status(401).json({ message: "Unauthorized" });
 
 		try {
-			jwt.verify(token, TOKEN_SECRET_JWT, (err, user) => {
-				if (err) return res.status(401).json({ message: "Unauthorized" });
+			const decoded = jwt.verify(token, TOKEN_SECRET_JWT);
 
-				const userFound = userModel.findById(user.id);
+			if (!decoded) return res.status(401).json({ message: ["Unauthorized"] });
+			
+			const userFound = await userModel.findById(decoded.id);
 
-				if (!userFound) return res.status(401).json({ message: ["Unauthorized"] });
+			if (!userFound) return res.status(401).json({ message: ["Unauthorized"] });
 
-				res.status(200).json({
-					id: userFound._id,
-					username: userFound.username,
-					email: userFound.email,
-					createdAt: userFound.createdAt,
-					updatedAt: userFound.updatedAt,
-				});
-			})
+			res.status(200).json({
+				id: userFound._id,
+				username: userFound.username,
+				email: userFound.email,
+				createdAt: userFound.createdAt,
+				updatedAt: userFound.updatedAt,
+			});
 		} catch (error) {
+			console.log(error);
 			res.status(500).json({ message: "Internal Server Error" });
 		}
 	};
