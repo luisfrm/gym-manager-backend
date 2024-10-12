@@ -14,45 +14,39 @@ import logsRouter from "./routes/logs.routes.js";
 import paymentRouter from "./routes/payment.routes.js";
 
 const PORT = process.env.PORT || 3000;
-// const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
 
 const createApp = () => {
-	const app = express();
+  const app = express();
 
-	const allowedOrigins = ['http://localhost:5173', 'https://gym-manager-frontend.netlify.app'];
+  const allowedOrigins = ['http://localhost:5173', 'https://gym-manager-frontend.netlify.app'];
 
-	app.use(cors({
-		origin: (origin, callback) => {
-			if (allowedOrigins.includes(origin) || !origin) {
-				callback(null, true);
-			} else {
-				callback(new Error('Not allowed by CORS'));
-			}
-		},
-		credentials: true,
-	}));
-	app.use(json());
-	app.use(morgan("dev"));
-	app.use(cookieParser());
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  }));
+  app.use(json());
+  app.use(morgan("dev"));
+  app.use(cookieParser());
   app.use("/api/store", storeRouter);
   app.use("/api", authRouter);
   app.use("/api/client", clientRouter);
-	app.use("/api/currency", currencyRouter);
-	app.use("/api/service", serviceRouter);
-	app.use("/api/trainer", trainerRouter);
-	app.use("/api/logs", logsRouter);
-	app.use("/api/payment", paymentRouter);
+  app.use("/api/currency", currencyRouter);
+  app.use("/api/service", serviceRouter);
+  app.use("/api/trainer", trainerRouter);
+  app.use("/api/logs", logsRouter);
+  app.use("/api/payment", paymentRouter);
 
+  app.get("/", (req, res) => {
+    res.send("Hello World!");
+  });
 
-	app.get("/", (req, res) => {
-		res.send("Hello World!");
-	});
-
-	app.listen(PORT, () => {
-		console.log(`Server is running on port ${PORT}`);
-	});
-
-	connectDB();
+  return app;
 };
 
-export default createApp;
+export { createApp, PORT, connectDB };
